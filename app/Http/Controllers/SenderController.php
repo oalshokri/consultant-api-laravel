@@ -23,7 +23,7 @@ class SenderController extends Controller
                         ->get();
                 })
                     ->withCount('mails')
-                    ->get()
+                    ->paginate(20)
             ], 200);
         } else {
             return response([

@@ -88,4 +88,22 @@ class CategoryController extends Controller
             'message' => 'Category deleted.'
         ], 200);
     }
+
+    // get category mails
+    public function getCatMails($id)
+    {
+
+        return response([
+            'category' => Category::where('id', $id)->with('senders',function($sender){
+                return $sender->with('mails', function ($mail) {
+                    return $mail->with('status:id,name,color')
+                        ->with('tags')->with('attachments')->with('activities', function ($activity) {
+                            return $activity->with('user')
+                                ->get();
+                        })
+                        ->get();
+                })->withCount('mails')->get();
+            })->withCount('senders')->first()
+        ], 200);
+    }
 }

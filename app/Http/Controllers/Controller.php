@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Mail;
-use Algolia\AlgoliaSearch\SearchIndex;
+//use Algolia\AlgoliaSearch\SearchIndex;
 
 class Controller extends BaseController
 {

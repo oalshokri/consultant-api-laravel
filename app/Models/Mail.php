@@ -27,11 +27,18 @@ class Mail extends Model
         'final_decision'
     ];
 
-    public function searchableAs()
-    {
-        return 'mails';
-    }
+//    public function searchableAs()
+//    {
+//        return 'mails';
+//    }
 
+    public function toSearchableArray()
+    {
+        return [
+            'subject' => $this->subject,
+            'description' => $this->description,
+        ];
+    }
 
 
     public function sender()

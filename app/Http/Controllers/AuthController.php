@@ -6,6 +6,8 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 class AuthController extends Controller
 {
@@ -14,19 +16,38 @@ class AuthController extends Controller
     {
         // dd(Role::select('id')->where('name', 'user')->pluck('id'));
         //validate fields
-        $attrs = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-        ]);
+
+        // $attrs = $request->validate([
+        //     'name' => 'required|string',
+        //     'email' => 'required|email|unique:users,email',
+        //     'password' => 'required|min:6|confirmed',
+        // ]);
+
+         $attrs = Validator::make($request->all(),[
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6|confirmed',
+            ]);
+
+        
+        if($attrs->fails()){
+            return response([
+                'message' =>'somthing wrong',
+                'error' => $attrs->errors()
+            ], 400);
+        }
+
+        $validated = $attrs->validated();
 
         //create user
         $user = User::create([
-            'name' => $attrs['name'],
-            'email' => $attrs['email'],
-            'password' => bcrypt($attrs['password']),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
             'role_id' => Role::select('id')->where('name', 'guest')->pluck('id')->first()
         ]);
+
+        
 
         if ($user->id == 1) {
             $user->update([

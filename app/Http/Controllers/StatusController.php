@@ -40,6 +40,7 @@ class StatusController extends Controller
     {
 
         $withMail = request()->mail;
+        
         if ($withMail == 'true') {
             return response([
                 'status' => Status::where('id', $id)->with('mails', function ($mail) {

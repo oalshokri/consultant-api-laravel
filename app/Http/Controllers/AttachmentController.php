@@ -38,7 +38,7 @@ class AttachmentController extends Controller
 
     public function show($imageUrl)
     {
-        return Image::make(storage_path('public/' . $imageUrl))->response();
+        // return Image::make(storage_path('public/' . $imageUrl))->response();
         // return response([
         //     'image' => Image::make(storage_path('public/' . $imageUrl))
         // ], 200);

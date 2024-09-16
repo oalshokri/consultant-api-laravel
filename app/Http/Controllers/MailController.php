@@ -46,7 +46,7 @@ class MailController extends Controller
         $attrs = $request->validate([
             'subject' => 'required|string',
             'description' => 'nullable|string',
-            'sender_id' => 'nullable|integer',
+            'sender_id' => 'integer',
             'archive_number' => 'required|string',
             'archive_date' => 'required|date',
             'decision' => 'nullable|string',

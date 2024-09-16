@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // current user auth
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/user/update', [AuthController::class, 'update']);
-    Route::put('/user/profile', [AuthController::class, 'updateProfileImage']);
+    // Route::put('/user/profile', [AuthController::class, 'updateProfileImage']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     //general users
@@ -73,7 +73,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/roles/{id}', [RoleController::class, 'show']); // get single role
     Route::put('/roles/{id}', [RoleController::class, 'update']); // update role
     Route::delete('/roles/{id}', [RoleController::class, 'destroy']); // delete role
-    Route::post('/users/{id}/roles', [RoleController::class, 'changeRole']); // add role to user
 
     //general sender
     Route::get('/senders', [SenderController::class, 'index']); // all senders
@@ -88,6 +87,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/categories/{id}', [CategoryController::class, 'show']); // get single category
     Route::put('/categories/{id}', [CategoryController::class, 'update']); // update category
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']); // delete category
+    Route::get('/categories/{id}/mails', [CategoryController::class, 'getCatMails']); // get category mails
 
     //status
     Route::get('/statuses', [StatusController::class, 'index']); // all statuses
@@ -106,7 +106,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('imageadd', 'Api\AttachmentController@addimage');
 
     //search
-    Route::get('/search', [Controller::class, 'search']); // all attachments
+    Route::get('/search', [Controller::class, 'search']);
 
     // Route::get('storage/{filename}', function ($filename) {
     //     return Image::make(storage_path('public/' . $filename))->response();
