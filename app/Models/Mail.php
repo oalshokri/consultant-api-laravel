@@ -32,14 +32,6 @@ class Mail extends Model
 //        return 'mails';
 //    }
 
-    public function toSearchableArray()
-    {
-        return [
-            'subject' => $this->subject,
-            'description' => $this->description,
-        ];
-    }
-
 
     public function sender()
     {

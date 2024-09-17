@@ -38,5 +38,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd /home/gazacnla/palmail && ./.scripts/deploy.sh"
+          script: "cd /home/gazacnla/palmail_files && ./.scripts/deploy.sh"
 
